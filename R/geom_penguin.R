@@ -17,9 +17,9 @@ ggname <- getFromNamespace("ggname", "ggplot2")
 ##' @importFrom grid gpar
 ##' @importFrom grDevices as.raster
 ##' @export
-draw_key_dog <- function(data, params, size) {
+draw_key_penguin <- function(data, params, size) {
 
-  filename <- system.file(paste0(data$dog, ".png"), package = "ggdogs")
+  filename <- system.file(paste0(data$dog, ".png"), package = "ggpalmerpenguins")
   img <- as.raster(png::readPNG(filename))
   aspect <- dim(img)[1]/dim(img)[2]
   # rasterGrob
@@ -29,10 +29,10 @@ draw_key_dog <- function(data, params, size) {
 }
 
 
-##' geom layer adding dogs
+##' geom layer adding penguins
 ##'
 ##'
-##' @title geom_dog
+##' @title geom_penguin
 ##' @param mapping aes mapping
 ##' @param data data
 ##' @param stat stat
@@ -48,21 +48,19 @@ draw_key_dog <- function(data, params, size) {
 ##' @examples
 ##' library("ggplot2")
 ##' ggplot(mtcars) +
-##' geom_dog(aes(mpg, wt), dog = "doge", size = 5)
+##' geom_penguin(aes(mpg, wt), penguin = "Adelie-allison_horst", size = 5)
 ##'
 ##' set.seed(1)
 ##' df <- data.frame(x = rnorm(10),
 ##'                  y = rnorm(10),
-##'                  image = sample(c("doge",
-##'                                   "thisisfine",
-##'                                   "tail",
-##'                                   "chilaquil",
-##'                                   "gabe"),
+##'                  image = sample(c("Adelie-allison_horst",
+##'                                   "chinstrap-allison_horst",
+##'                                   "gentoo-allison_horst"),
 ##'                                  size = 10, replace = TRUE))
 ##'  ggplot(df) +
-##' geom_dog(aes(x, y, dog = image), size = 5)
+##' geom_penguin(aes(x, y, penguin = image), size = 5)
 ##'
-geom_dog <- function(mapping = NULL, data = NULL, stat = "identity",
+geom_penguin <- function(mapping = NULL, data = NULL, stat = "identity",
                      position = "identity", inherit.aes = TRUE,
                      na.rm = FALSE, by = "width", nudge_x = 0, ...) {
 
@@ -71,7 +69,7 @@ geom_dog <- function(mapping = NULL, data = NULL, stat = "identity",
   layer(
     data = data,
     mapping = mapping,
-    geom = Geomdog,
+    geom = Geompenguin,
     stat = stat,
     position = position,
     show.legend = NA,
@@ -93,14 +91,14 @@ geom_dog <- function(mapping = NULL, data = NULL, stat = "identity",
 ##' @importFrom ggplot2 draw_key_blank
 ##' @importFrom grid gTree
 ##' @importFrom grid gList
-Geomdog <- ggplot2::ggproto("Geomdog", ggplot2::Geom,
+Geomdog <- ggplot2::ggproto("Geompenguin", ggplot2::Geom,
                      setup_data = function(data, params) {
                        if (is.null(data$subset))
                          return(data)
                        data[which(data$subset),]
                      },
 
-                     default_aes = ggplot2::aes(dog = "doge", size = 1,
+                     default_aes = ggplot2::aes(penguin = "Adelie-allison_horst", size = 1,
                                        colour = NULL, angle = 0, alpha = 1),
 
                      draw_panel = function(data, panel_params, coord, by, na.rm=FALSE,
@@ -115,7 +113,7 @@ Geomdog <- ggplot2::ggproto("Geomdog", ggplot2::Geom,
                        }
                        if (is.null(data$dog)) return(NULL)
 
-                       groups <- split(data, factor(data$dog))
+                       groups <- split(data, factor(data$penguin))
                        imgs <- names(groups)
                        grobs <- lapply(seq_along(groups), function(i) {
                          d <- groups[[i]]
@@ -127,12 +125,12 @@ Geomdog <- ggplot2::ggproto("Geomdog", ggplot2::Geom,
                        grobs <- do.call("c", grobs)
                        class(grobs) <- "gList"
 
-                       ggplot2:::ggname("geom_dog",
+                       ggplot2:::ggname("geom_penguin",
                               gTree(children = grobs, cl = "fixasp_raster"))
                      },
-                     non_missing_aes = c("size", "dog"),
+                     non_missing_aes = c("size", "penguin"),
                      required_aes = c("x", "y"),
-                     draw_key = draw_key_dog ## draw_key_blank ## need to write the `draw_key_dog` function.
+                     draw_key = draw_key_penguin ## draw_key_blank ## need to write the `draw_key_penguin` function.
 )
 
 
@@ -144,7 +142,7 @@ Geomdog <- ggplot2::ggproto("Geomdog", ggplot2::Geom,
 ##' @importFrom tools file_ext
 imageGrob <- function(x, y, size, img, by, hjust, colour, alpha, image_fun, angle, asp = 1) {
   if (!methods::is(img, "magick-image")) {
-      filename <- system.file(paste0(img, ".png"), package = "ggdogs")
+      filename <- system.file(paste0(img, ".png"), package = "ggpalmerpenguins")
       img <- magick::image_read(filename)
 
     asp <- getAR2(img)/asp

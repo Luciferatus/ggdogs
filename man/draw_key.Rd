@@ -2,10 +2,10 @@
 % Please edit documentation in R/geom_dog.R
 \name{draw_key}
 \alias{draw_key}
-\alias{draw_key_dog}
+\alias{draw_key_penguin}
 \title{key drawing function}
 \usage{
-draw_key_dog(data, params, size)
+draw_key_penguin(data, params, size)
 }
 \arguments{
 \item{data}{A single row data frame containing the scaled aesthetics to display in this key}

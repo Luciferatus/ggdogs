@@ -3,7 +3,7 @@ Title: Adding Artwork by @allison_horst to ggplot2
 Version: 1.0
 Authors@R: 
     person("R", "CODER",
-           role = c("aut", "cre"), email = "support.rcoder@protonmail.com"),
+           role = c("aut", "cre"), email = "support.rcoder@protonmail.com")
     person("Luciferatus",
           role = c("aut", "cre"))
 Description: This package adds palmerpenguins as points in ggplot2

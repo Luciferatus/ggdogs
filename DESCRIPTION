@@ -5,7 +5,7 @@ Authors@R:
     person("R", "CODER",
            role = c("aut", "cre"), email = "support.rcoder@protonmail.com")
     person("Luciferatus",
-          role = c("aut", "cre"))
+           role = c("aut", "cre"), email = "yasminpingota14@gmail.com")
 Description: This package adds palmerpenguins as points in ggplot2
 License: GPL-3
 Encoding: UTF-8

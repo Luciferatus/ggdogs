@@ -1,5 +1,5 @@
-# ggdogs
-The geom you always wished for adding dogs to ggplot2. This package is part of the memeverse.
+# ggpalmerpenguins
+This geom adding palmerpenguins Artwork by @allison_horst to ggplot2. This package uses the ggdogs code by R-CoderDotCom.Here's how to use the package in RStudio.
 The source code of this package is based on geom_image from ggimage.
 
 
